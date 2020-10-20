@@ -3,7 +3,7 @@ daemon:*::
 bin:*::
 sys:*::
 adm:*::syslog
-tty:*::
+tty:*::syslog
 disk:*::
 lp:*::
 mail:*::
@@ -55,3 +55,5 @@ uuidd:!::
 tcpdump:!::
 systemd-coredump:!!::
 check:!::
+incron:!::
+user1:!::
