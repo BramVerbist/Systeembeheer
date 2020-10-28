@@ -56,4 +56,3 @@ tcpdump:!::
 systemd-coredump:!!::
 check:!::
 incron:!::
-user1:!::
