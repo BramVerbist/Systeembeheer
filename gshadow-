@@ -56,3 +56,6 @@ tcpdump:!::
 systemd-coredump:!!::
 check:!::
 incron:!::
+ntp:!::
+bind:!::
+_chrony:!::
