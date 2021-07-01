@@ -1,7 +1,5 @@
 options {	
 	directory "/var/cache/bind";
-		recursion no;
-		allow-transfer { none; };
 
 	// If there is a firewall between you and nameservers you want
 	// to talk to, you may need to fix the firewall to allow multiple
@@ -22,7 +20,6 @@ options {
 	// you will need to update your keys.  See https://www.isc.org/bind-keys
 	//========================================================================
 	dnssec-validation auto;
-
-	auth-nxdomain no;
+	
 	listen-on-v6 { any; };
 };

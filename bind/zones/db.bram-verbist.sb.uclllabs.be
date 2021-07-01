@@ -1,25 +1,28 @@
 ;
 ; BIND data file for local loopback interface
 ;
-$TTL	604800
-@	IN	SOA	ns.bram-verbist.sb.uclllabs.be. root.bram-verbist.sb.uclllabs.be. (
-			      2		; Serial
-			 604800		; Refresh
-			  86400		; Retry
-			2419200		; Expire
-			 604800 )	; Negative Cache TTL
+$TTL	400
+@	IN	SOA	ns.bram-verbist.sb.uclllabs.be. host.bram-verbist.sb.uclllabs.be. (
+			     94		; Serial
+			    921	        ; Refresh
+			    120		; Retry
+			    920		; Expire
+			    400)	; Negative Cache TTL
 ;
-bram-verbist.sb.uclllabs.be.	IN	NS	ns1.uclllabs.be.
-bram-verbist.sb.uclllabs.be.	IN	NS	ns2.uclllabs.be.
-bram-verbist.sb.uclllabs.be.	IN	NS	ns.bram-verbist.sb.uclllabs.be.	
 
-ns.bram-verbist.sb.uclllabs.be.	IN	A	193.191.177.142
+@       IN      NS      ns.bram-verbist.sb.uclllabs.be.
+@	IN	NS	ns1.uclllabs.be.
+@	IN	NS	ns2.uclllabs.be.	
 
-@	IN	A	193.191.177.142
-test    IN      A       193.191.177.254
-ns      IN      A       193.191.177.142
-www     IN      A       193.191.177.142
+subzone	IN	NS	ns
 
-@       IN      AAAA       fe80::7481:5cff:fe47:adea
-test    IN      AAAA       fe80::7481:5cff:fe47:adea
-ns      IN      AAAA       fe80::7481:5cff:fe47:adea
+@	IN	A	193.192.177.142
+ns      IN      A       193.192.177.142
+www     IN      A       193.192.177.142
+www1	IN	A	193.192.177.142
+www2	IN	A	193.192.177.142
+
+test    IN      A       193.192.177.254
+
+@       IN      AAAA   2001:6a8:2880:a077::8e
+ns      IN      AAAA   2001:6a8:2880:a077::8e
