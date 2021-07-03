@@ -14,18 +14,16 @@ $TTL    400
 @       IN      NS      ns1.uclllabs.be.
 @       IN      NS      ns2.uclllabs.be.
 
-;subzone IN      NS      ns
+subzone IN      NS      ns
 
-@       IN      A       193.191.177.142
-ns      IN      A       193.191.177.142
-www     IN      A       193.191.177.142
-www1    IN      A       193.191.177.142
-www2    IN      A       193.191.177.142
+
 
 test    IN      A       193.191.177.254
 
 @       IN      AAAA   2001:6a8:2880:a077::8e
 ns      IN      AAAA   2001:6a8:2880:a077::8e
+
+;subzones
 subzoneboh4ee IN NS ns.bram-verbist.sb.uclllabs.be.
 subzoneboh4ee IN A 193.191.177.142
 subzoneoah6ee IN NS ns.bram-verbist.sb.uclllabs.be.
