@@ -1,4 +1,8 @@
-//
+include "/etc/bind/named.conf.mrt-zones";
+
+zone "bram-verbist.sb.uclllabs.be"{
+        type master;
+   //
 // Do any local configuration here
 //
 
@@ -6,7 +10,12 @@
 // organization
 //include "/etc/bind/zones.rfc1918";
 
-zone "ubuntu.local" {
-	type master;
-	file "s.be";
+include "/etc/bind/named.conf.mrt-zones";
+
+zone "bram-verbist.sb.uclllabs.be"{ 
+	type master; 
+	file "/etc/bind/zones/db.bram-verbist.sb.uclllabs.be";
+	allow-transfer { 193.191.177.4; 193.191.176.254; 127.0.0.1;};
+	also-notify { 193.191.177.4; 193.191.176.254; };
 };
+

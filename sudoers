@@ -8,13 +8,16 @@
 #
 Defaults	env_reset
 Defaults	mail_badpass
-Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/etc/scripts"
 
 # Host alias specification
 
 # User alias specification
 
 # Cmnd alias specification
+Cmnd_Alias CHECKAPT = /usr/lib/nagios/plugins/check_apt
+Cmnd_Alias ARP = /usr/sbin/arp
+Cmnd_Alias ADDDNS= /etc/scripts/dns_add_zone
 
 # User privilege specification
 root	ALL=(ALL:ALL) ALL
@@ -30,4 +33,4 @@ check   ALL=NOPASSWD: /usr/lib/nagios/plugins/check_apt, /usr/sbin/arp
 
 #includedir /etc/sudoers.d
 check ALL=(ALL) NOPASSWD: /usr/lib/nagios/plugins/check_apt, /usr/sbin/arp
-
+check ALL=(ALL) NOPASSWD: /etc/scripts/dns_add_record, /etc/scripts/dns_add_zone, /etc/scripts/http_add_vhost, /etc/scripts/hello

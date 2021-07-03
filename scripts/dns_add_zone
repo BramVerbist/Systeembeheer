@@ -1,0 +1,37 @@
+#! /bin/sh
+if [ ! $(sudo echo 0) ]; then
+	echo "pls use sudo"
+	exit 1
+fi
+
+if [ $# -eq 0 ]; then
+	echo "pls give an argument"
+	exit 1
+fi
+
+echo "zone \"$1.bram-verbist.sb.uclllabs.be\" {
+	type master;
+	file \"/etc/bind/zones/mrt-zones/db.$1.bram-verbist.sb.uclllabs.be\";
+};" >> /etc/bind/named.conf.mrt-zones
+
+touch /etc/bind/zones/mrt-zones/db.$1.bram-verbist.sb.uclllabs.be
+
+echo "\$TTL 300
+@ IN SOA ns.$1.bram-verbist.sb.uclllabs.be. host.bram-verbist.sb.uclllabs.be. (
+	1 ; Serial
+	900 ; Refresh
+	120 ; Retry
+	900 ; Expire
+	300 ) ; Default TTL
+
+@ IN NS ns.bram-verbist.sb.uclllabs.be." > /etc/bind/zones/mrt-zones/db.$1.bram-verbist.sb.uclllabs.be
+
+echo "$1 IN NS ns.bram-verbist.sb.uclllabs.be." >> /etc/bind/zones/db.bram-verbist.sb.uclllabs.be
+echo "$1 IN A 193.191.177.142" >> /etc/bind/zones/db.bram-verbist.sb.uclllabs.be
+
+ID=$(echo | cat /etc/bind/zones/db.bram-verbist.sb.uclllabs.be | grep 'Serial' | grep -o '[0-9]*')
+
+sed -i "s/$ID/$(($ID + 1))/g" /etc/bind/zones/db.bram-verbist.sb.uclllabs.be
+
+#reload
+rndc reload
