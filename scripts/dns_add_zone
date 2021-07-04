@@ -33,5 +33,4 @@ ID=$(echo | cat /etc/bind/zones/db.bram-verbist.sb.uclllabs.be | grep 'Serial' |
 
 sed -i "s/$ID/$(($ID + 1))/g" /etc/bind/zones/db.bram-verbist.sb.uclllabs.be
 
-#reload
 rndc reload

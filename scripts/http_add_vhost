@@ -1,32 +1,29 @@
 #! /bin/bash
 
-PREFIX="`echo $1 | awk -F . '{print $1}'`"
-SUBDOMAIN="`echo $1 | awk -F . '{print $2}'`"
+SUBDOMAIN="`echo $1 | awk -F . '{print $1}'`"
 
-echo "a"
-echo "$PREFIX"
-echo "b"
 echo "$SUBDOMAIN"
- 
-GREP=$(grep "$PREFIX[[:space:]]*IN[[:space:]]*A" /etc/bind/zones/mrt-zones/db.$SUBDOMAIN.bram-verbist.sb.uclllabs.be)
+
+GREP=$(grep "$SUBDOMAIN[[:space:]]*IN[[:space:]]*A" /etc/bind/zones/db.bram-verbist.sb.uclllabs.be)
 
 if [ -z "$GREP" ];
 then
-echo "prefix or subdomain not found"
+echo "subdomain not found"
 else
-	mkdir /var/www/html/$PREFIX.$SUBDOMAIN
-	touch /var/www/html/$PREFIX.$SUBDOMAIN/index.html
-	echo "welcome $PREFIX.$SUBDOMAIN" > /var/www/html/$PREFIX.$SUBDOMAIN/index.html
-	
-	touch /etc/apache2/sites-available/$PREFIX.$SUBDOMAIN.conf
-	echo "<VirtualHost *:80>
-		ServerName $1
-		DocumentRoot /var/www/html/$PREFIX.$SUBDOMAIN
-		Loglevel info
-		ErrorLog "${APACHE_LOG_DIR}"/$PREFIX.$SUBDOMAIN-error.log
-		CustomLog "${APACHE_LOG_DR}"/$PREFIX.$SUBDOMAIN-access.log combined
-	</VirtualHost>" > /etc/apache2/sites-available/$PREFIX.$SUBDOMAIN.conf
+	mkdir /var/www/html/$SUBDOMAIN
+	touch /var/www/html/$SUBDOMAIN/index.html
+	echo "welcome $SUBDOMAIN" > /var/www/html/$SUBDOMAIN/index.html
 
-	a2ensite $PREFIX.$SUBDOMAIN.conf
+	echo "@ IN A 193.191.177.142" >> /etc/bind/zones/mrt-zones/db.$SUBDOMAIN.bram-verbist.sb.uclllabs.be
+	perl -i -pe '/Serial/ && s/(\d+)/$1+1 . $2/e' /etc/bind/zones/mrt-zones/db.$SUBDOMAIN.bram-verbist.sb.uclllabs.be
+	rndc reload
+
+	touch /etc/apache2/sites-available/$SUBDOMAIN.bram-verbist.sb.uclllabs.be.conf
+	printf "<VirtualHost *:80>
+	ServerName $1
+	DocumentRoot /var/www/html/$SUBDOMAIN
+</VirtualHost>" > /etc/apache2/sites-available/$SUBDOMAIN.bram-verbist.sb.uclllabs.be.conf
+
+	a2ensite $SUBDOMAIN.bram-verbist.sb.uclllabs.be.conf
 	systemctl reload apache2
 fi
