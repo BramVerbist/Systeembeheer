@@ -3,7 +3,7 @@
 ;
 $TTL    400
 @       IN      SOA     ns.bram-verbist.sb.uclllabs.be. root.bram-verbist.sb.uclllabs.be. (
-                            111          ; Serial
+                            116          ; Serial
                             930         ; Refresh
                             120         ; Retry
                             920         ; Expire
@@ -45,3 +45,10 @@ bramy IN NS ns.bram-verbist.sb.uclllabs.be.
 bramy IN A 193.191.177.142
 potato IN NS ns.bram-verbist.sb.uclllabs.be.
 potato IN A 193.191.177.142
+subzoneora1xe IN NS ns.bram-verbist.sb.uclllabs.be.
+subzoneora1xe IN A 193.191.177.142
+subzonephaot9 IN NS ns.bram-verbist.sb.uclllabs.be.
+subzonephaot9 IN A 193.191.177.142
+subzone001 IN NS ns.bram-verbist.sb.uclllabs.be.
+subzone001 IN A 193.191.177.142
+
